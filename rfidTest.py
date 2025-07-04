@@ -10,6 +10,6 @@ try:
         id, text = reader.read()
         print(f"ID: {id}")
         print(f"Text on tag: {text}")
-        time.sleep(1)  # Wait for a second before the next read
+        time.sleep(3)  # Wait for a second before the next read
 finally:
     GPIO.cleanup()
