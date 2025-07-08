@@ -12,8 +12,15 @@ SERVO_GPIO = 18
 lgpio.gpio_claim_output(gpio, SERVO_GPIO, 0)  # Ensure the pin is set to output mode
 
 def set_servo_angle(angle):
-    pulse_width = 1000 + (angle / 180) * 1000  # µs
-    duty_cycle = (pulse_width * 100) / 20000
+    # Clamp angle to range
+    angle = max(0, min(angle, 180))
+    
+    min_pulse = 500    # microseconds (try 500–600)
+    max_pulse = 2400   # microseconds (try 2200–2400)
+
+    pulse_width = min_pulse + (angle / 180) * (max_pulse - min_pulse)
+    duty_cycle = (pulse_width * 100) / 20000  # for 50 Hz
+
     lgpio.tx_pwm(gpio, SERVO_GPIO, 50, duty_cycle)
 
 def servo_control():
@@ -23,7 +30,7 @@ def servo_control():
     time.sleep(2)
     print("Returning to 0°")
     set_servo_angle(0)
-    time.sleep(2)
+    time.sleep(1)
 
 # List of authorized UIDs as tuples
 authorized_tags = [
@@ -32,6 +39,10 @@ authorized_tags = [
     (100, 88, 201, 3),
     (100, 88, 201, 4)
 ]
+
+pulse_width_0 = 1000  # in microseconds for 0 degrees
+duty_cycle_for_0_deg = (pulse_width_0 * 100) / 20000
+
 
 def main():
     print("Starting the RFID Card Reader...")
@@ -44,6 +55,7 @@ def main():
     try:
         reader = RC522SPILibrary(rst_pin=22)
         while True:
+            lgpio.tx_pwm(gpio, SERVO_GPIO, 50, duty_cycle_for_0_deg)
             status, _ = reader.request()
             if status == StatusCodes.OK:
                 status, uid = reader.anticoll()
