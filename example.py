@@ -15,8 +15,8 @@ def set_servo_angle(angle):
     # Clamp angle to range
     angle = max(0, min(angle, 180))
     
-    min_pulse = 500    # microseconds (try 500–600)
-    max_pulse = 2400   # microseconds (try 2200–2400)
+    min_pulse = 600    # microseconds (try 500–600)
+    max_pulse = 2300   # microseconds (try 2200–2400)
 
     pulse_width = min_pulse + (angle / 180) * (max_pulse - min_pulse)
     duty_cycle = (pulse_width * 100) / 20000  # for 50 Hz
@@ -26,7 +26,7 @@ def set_servo_angle(angle):
 def servo_control():
     print("Going to 90°")
     set_servo_angle(90)
-    time.sleep(5)
+    time.sleep(3)
     print("Returning to 0°")
 
 # List of authorized UIDs as tuples
