@@ -9,6 +9,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 # Servo setup
 gpio = lgpio.gpiochip_open(0)
 SERVO_GPIO = 18
+lgpio.gpio_claim_output(gpio, SERVO_GPIO, 0)  # Ensure the pin is set to output mode
 
 def set_servo_angle(angle):
     pulse_width = 1000 + (angle / 180) * 1000  # µs
@@ -19,10 +20,10 @@ def servo_control():
     set_servo_angle(0)  # Initialize servo to 0°
     print("Going to 90°")
     set_servo_angle(90)
-    time.sleep(1)
+    time.sleep(2)
     print("Returning to 0°")
     set_servo_angle(0)
-    time.sleep(1)
+    time.sleep(2)
 
 # List of authorized UIDs as tuples
 authorized_tags = [
