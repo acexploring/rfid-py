@@ -32,6 +32,7 @@ def main():
                         last_uid = uid
                         # Convert UID to a readable format
                         uid_str = ":".join([f"{i:02X}" for i in uid])
+                        print(f"this is the unformated UID: {uid}")
                         print("\n================================")
                         print(f"Card detected!")
                         print(f"  UID: {uid_str}")
