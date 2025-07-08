@@ -26,7 +26,7 @@ def set_servo_angle(angle):
 def servo_control():
     print("Going to 90°")
     set_servo_angle(90)
-    time.sleep(2)
+    time.sleep(5)
     print("Returning to 0°")
 
 # List of authorized UIDs as tuples
