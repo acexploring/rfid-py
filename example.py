@@ -21,7 +21,7 @@ def set_servo_angle(angle):
     pulse_width = min_pulse + (angle / 180) * (max_pulse - min_pulse)
     duty_cycle = (pulse_width * 100) / 20000  # for 50 Hz
 
-    lgpio.tx_pwm(gpio, SERVO_GPIO, 50, duty_cycle)
+    lgpio.tx_pwm(gpio, SERVO_GPIO, 50, round(duty_cycle, 1))
 
 def servo_control():
     print("Going to 90°")
