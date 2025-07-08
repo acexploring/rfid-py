@@ -24,7 +24,6 @@ def set_servo_angle(angle):
     lgpio.tx_pwm(gpio, SERVO_GPIO, 50, duty_cycle)
 
 def servo_control():
-    set_servo_angle(0)  # Initialize servo to 0°
     print("Going to 90°")
     set_servo_angle(90)
     time.sleep(2)
