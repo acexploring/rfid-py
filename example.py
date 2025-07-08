@@ -52,7 +52,7 @@ def main():
     try:
         reader = RC522SPILibrary(rst_pin=22)
         while True:
-            lgpio.tx_pwm(gpio, SERVO_GPIO, 50, duty_cycle_for_0_deg)
+            set_servo_angle(0)  # Initialize servo to 0°
             status, _ = reader.request()
             if status == StatusCodes.OK:
                 status, uid = reader.anticoll()
