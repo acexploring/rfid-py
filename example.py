@@ -75,7 +75,7 @@ def main():
     finally:
         if reader:
             reader.cleanup()
-        lgpio.tx_pwm(gpio, SERVO_GPIO, 0, 0)
+        lgpio.gpio_claim_output(gpio, SERVO_GPIO, 0)  # reclaim control and reset pin low
         lgpio.gpiochip_close(gpio)
         print("Resources cleaned up.")
 
