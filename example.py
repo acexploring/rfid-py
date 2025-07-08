@@ -37,6 +37,7 @@ def main():
                         print(f"  UID: {uid_str}")
                         print("================================")
                         print("INFO: You can now use this UID in your own code.")
+                        time.sleep(2)  # Short pause to avoid flooding the output
                 # If the UID could not be read, but a card is present,
                 # nothing is done until the card is removed.
             else:
