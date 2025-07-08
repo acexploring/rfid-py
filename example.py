@@ -28,8 +28,6 @@ def servo_control():
     set_servo_angle(90)
     time.sleep(2)
     print("Returning to 0°")
-    set_servo_angle(0)
-    time.sleep(1)
 
 # List of authorized UIDs as tuples
 authorized_tags = [
