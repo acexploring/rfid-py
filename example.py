@@ -17,7 +17,7 @@ def set_servo_angle(angle):
     angle = max(0, min(angle, 180))
     
     min_pulse = 600    # microseconds (try 500–600)
-    max_pulse = 2500   # microseconds (try 2200–2400)
+    max_pulse = 2600   # microseconds (try 2200–2400)
 
     pulse_width = min_pulse + (angle / 180) * (max_pulse - min_pulse)
     duty_cycle = (pulse_width * 100) / 20000  # for 50 Hz
