@@ -9,9 +9,9 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 # Servo setup
 gpio = lgpio.gpiochip_open(0)
 SERVO_GPIO = 18
-RELAY_GPIO = 17  # Example GPIO for relay control, if needed
+TRANSISTOR_GPIO = 17  # Example GPIO for TRANSISTOR control, if needed
 lgpio.gpio_claim_output(gpio, SERVO_GPIO, 0)  # Ensure the pin is set to output mode
-lgpio.gpio_claim_output(gpio, RELAY_GPIO, 0)
+lgpio.gpio_claim_output(gpio, TRANSISTOR_GPIO, 0)
 def set_servo_angle(angle):
     # Clamp angle to range
     angle = max(0, min(angle, 180))
@@ -25,18 +25,19 @@ def set_servo_angle(angle):
     lgpio.tx_pwm(gpio, SERVO_GPIO, 50, round(duty_cycle, 1))
 
 def servo_control():
-    lgpio.gpio_write(gpio, RELAY_GPIO, 1)
+    lgpio.gpio_write(gpio, TRANSISTOR_GPIO, 1)
     time.sleep(0.1)  
     print("Going to 90°")
     set_servo_angle(90)
     time.sleep(1.2)  # Wait for servo to reach position
-    lgpio.gpio_write(gpio, RELAY_GPIO, 0)
+    lgpio.gpio_write(gpio, TRANSISTOR_GPIO, 0)
     time.sleep(3) 
     print("Returning to 0°")
-    lgpio.gpio_write(gpio, RELAY_GPIO, 1)
+    lgpio.gpio_write(gpio, TRANSISTOR_GPIO, 1)
     time.sleep(0.1)
     set_servo_angle(0)  # Initialize servo to 0°
-    lgpio.gpio_write(gpio, RELAY_GPIO, 0)
+    time.sleep(1.2)  
+    lgpio.gpio_write(gpio, TRANSISTOR_GPIO, 0)
     lgpio.tx_pwm(gpio, SERVO_GPIO, 0, 0)
 
 
