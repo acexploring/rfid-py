@@ -1,4 +1,6 @@
-import RPi.GPIO as GPIO
+#this code doesnt work since RPi.GPIO is not compatible with the pi 5
+#you cannot use SimpleMFRC522 with RPi.GPIO on the Pi 5
+import as GPIO
 import time
 from mfrc522 import SimpleMFRC522
 
