@@ -91,6 +91,9 @@ def main():
                     if uid_tuple in authorized_tags:
                         print("✅ Authorized tag detected!")
                         servo_control()
+                        reader.cleanup()
+                        reader.initialize()  # Reinitialize the reader after cleanup
+                        time.sleep(0.1)
                     else:
                         print("❌ Unauthorized tag.")
                     time.sleep(2)
