@@ -92,7 +92,7 @@ def main():
                         print("✅ Authorized tag detected!")
                         servo_control()
                         reader.cleanup()
-                        reader.initialize()  # Reinitialize the reader after cleanup
+                        reader = RC522SPILibrary(rst_pin=22)
                         time.sleep(0.1)
                     else:
                         print("❌ Unauthorized tag.")
