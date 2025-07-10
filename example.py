@@ -17,7 +17,7 @@ def set_servo_angle(angle):
     angle = max(0, min(angle, 180))
     
     min_pulse = 600    # microseconds (try 500–600)
-    max_pulse = 2200   # microseconds (try 2200–2400)
+    max_pulse = 2400   # microseconds (try 2200–2400)
 
     pulse_width = min_pulse + (angle / 180) * (max_pulse - min_pulse)
     duty_cycle = (pulse_width * 100) / 20000  # for 50 Hz
@@ -31,7 +31,7 @@ def servo_control():
 
     print("Going to 90°")
     set_servo_angle(90)
-    time.sleep(0.8)
+    time.sleep(0.5)
 
     lgpio.gpio_write(gpio, TRANSISTOR_GPIO, 0)
     time.sleep(3)
@@ -41,7 +41,7 @@ def servo_control():
     time.sleep(0.1)
 
     set_servo_angle(0)
-    time.sleep(0.8)
+    time.sleep(0.5)
 
     # Let PWM continue briefly
     time.sleep(0.3)
