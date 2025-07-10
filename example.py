@@ -30,7 +30,7 @@ def servo_control():
     time.sleep(0.1)
 
     print("Going to 90°")
-    set_servo_angle(180)
+    set_servo_angle(90)
     time.sleep(0.7)
 
     lgpio.gpio_write(gpio, TRANSISTOR_GPIO, 0)
