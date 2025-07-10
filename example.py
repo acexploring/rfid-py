@@ -24,21 +24,32 @@ def set_servo_angle(angle):
 
     lgpio.tx_pwm(gpio, SERVO_GPIO, 50, round(duty_cycle, 1))
 
+
 def servo_control():
     lgpio.gpio_write(gpio, TRANSISTOR_GPIO, 1)
-    time.sleep(0.1)  
+    time.sleep(0.1)
+
     print("Going to 90°")
     set_servo_angle(90)
-    time.sleep(1.2)  # Wait for servo to reach position
+    time.sleep(1.2)
+
     lgpio.gpio_write(gpio, TRANSISTOR_GPIO, 0)
-    time.sleep(3) 
+    time.sleep(3)
+
     print("Returning to 0°")
     lgpio.gpio_write(gpio, TRANSISTOR_GPIO, 1)
     time.sleep(0.1)
-    set_servo_angle(0)  # Initialize servo to 0°
-    time.sleep(1.2)  
-    lgpio.gpio_write(gpio, TRANSISTOR_GPIO, 0)
+
+    set_servo_angle(0)
+    time.sleep(1.2)
+
+    # Let PWM continue briefly
+    time.sleep(0.3)
     lgpio.tx_pwm(gpio, SERVO_GPIO, 0, 0)
+    time.sleep(0.3)
+    # Now cut power to servo
+    lgpio.gpio_write(gpio, TRANSISTOR_GPIO, 0)
+
 
 
 
