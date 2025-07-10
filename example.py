@@ -31,7 +31,7 @@ def servo_control():
 
     print("Going to 90°")
     set_servo_angle(90)
-    time.sleep(0.5)
+    time.sleep(0.7)
 
     lgpio.gpio_write(gpio, TRANSISTOR_GPIO, 0)
     time.sleep(3)
@@ -44,7 +44,6 @@ def servo_control():
     time.sleep(0.5)
 
     # Let PWM continue briefly
-    time.sleep(0.3)
     lgpio.tx_pwm(gpio, SERVO_GPIO, 0, 0)
     time.sleep(0.3)
     # Now cut power to servo
