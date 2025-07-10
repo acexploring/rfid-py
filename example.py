@@ -16,8 +16,8 @@ def set_servo_angle(angle):
     # Clamp angle to range
     angle = max(0, min(angle, 180))
     
-    min_pulse = 500    # microseconds (try 500–600)
-    max_pulse = 3000   # microseconds (try 2200–2400)
+    min_pulse = 600    # microseconds (try 500–600)
+    max_pulse = 5000   # microseconds (try 2200–2400)
 
     pulse_width = min_pulse + (angle / 180) * (max_pulse - min_pulse)
     duty_cycle = (pulse_width * 100) / 20000  # for 50 Hz
